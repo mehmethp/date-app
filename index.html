@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Get Well Soon</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            height: 100vh;
+            background: #f8e1e7;
+            text-align: center;
+            font-family: Arial, sans-serif;
+            overflow: hidden;
+            transition: background 1s ease-in-out;
+        }
+        .heart {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background: red;
+            clip-path: polygon(50% 0%, 100% 35%, 85% 100%, 50% 85%, 15% 100%, 0% 35%);
+            opacity: 0.6;
+            animation: float 4s infinite ease-in-out;
+        }
+        @keyframes float {
+            0% {
+                transform: translateY(0) scale(1);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-100vh) scale(0.5);
+                opacity: 0;
+            }
+        }
+        .gif-container {
+            position: relative;
+        }
+        .gif-container img {
+            width: 300px;
+            height: auto;
+        }
+        .title {
+            position: relative;
+            top: -50px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 50px;
+            font-weight: bold;
+            color: red;
+        }
+        .btn {
+            padding: 10px 20px;
+            font-size: 18px;
+            background: #ff4b5c;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            margin-top: 20px;
+            transition: background 0.3s;
+        }
+        .btn:hover {
+            background: #e63e4a;
+        }
+        .message {
+            display: none;
+            margin-top: 20px;
+            font-size: 18px;
+            color: #333;
+        }
+    </style>
+</head>
+<body id="pageBody">
+    <div class="gif-container">
+        <div class="title">GEÇMİŞ OLSUN ELİF</div>
+        <img id="healthGif" src="./public/sick.gif" alt="Get Well Soon">
+    </div>
+    <button class="btn" onclick="getWell()">Hemen İyileş</button>
+    <p class="message" id="message">Umarım en kısa sürede toparlar ve daha iyi hissetmeye başlarsın ❤️</p>
+    <audio id="backgroundMusic" src="./public/kar.mp3"></audio>
+    <script>
+        function getWell() {
+            document.getElementById("healthGif").src = "./public/well.gif";
+            document.getElementById("message").style.display = "block";
+            document.getElementById("pageBody").style.background = "pink";
+            createHearts();
+            playMusic();
+        }
+        function createHearts() {
+            for (let i = 0; i < 20; i++) {
+                let heart = document.createElement("div");
+                heart.className = "heart";
+                heart.style.left = Math.random() * 100 + "vw";
+                heart.style.animationDuration = Math.random() * 2 + 3 + "s";
+                document.body.appendChild(heart);
+                setTimeout(() => heart.remove(), 4000);
+            }
+        }
+        function playMusic() {
+            let music = document.getElementById("backgroundMusic");
+            music.volume = 0.3;
+            music.play();
+        }
+    </script>
+</body>
+</html>
